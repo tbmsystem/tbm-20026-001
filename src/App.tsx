@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -24,23 +25,26 @@ function App() {
   };
 
   return (
-    <>
-      {view === 'login' && (
-        <Login
-          onLoginSuccess={handleLoginSuccess}
-          onShowRegister={() => setView('register')}
-        />
-      )}
-      {view === 'register' && (
-        <Register
-          onBackToLogin={() => setView('login')}
-          onRegisterSuccess={handleRegisterSuccess}
-        />
-      )}
-      {view === 'dashboard' && (
-        <Dashboard username={username} onLogout={handleLogout} />
-      )}
-    </>
+    <div className="app-layout">
+      <main className="main-content">
+        {view === 'login' && (
+          <Login
+            onLoginSuccess={handleLoginSuccess}
+            onShowRegister={() => setView('register')}
+          />
+        )}
+        {view === 'register' && (
+          <Register
+            onBackToLogin={() => setView('login')}
+            onRegisterSuccess={handleRegisterSuccess}
+          />
+        )}
+        {view === 'dashboard' && (
+          <Dashboard username={username} onLogout={handleLogout} />
+        )}
+      </main>
+      <Footer />
+    </div>
   );
 }
 
