@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import './Dashboard.css';
 
 interface DashboardProps {
@@ -5,7 +6,27 @@ interface DashboardProps {
     onLogout: () => void;
 }
 
+interface User {
+    username: string;
+    role: string;
+    createdAt?: string;
+}
+
 export default function Dashboard({ username, onLogout }: DashboardProps) {
+    const [savedUsers, setSavedUsers] = useState<User[]>([]);
+
+    useEffect(() => {
+        const users = JSON.parse(localStorage.getItem('mock_users') || '[]');
+        setSavedUsers(users);
+    }, []);
+
+    const clearUsers = () => {
+        if (confirm('Sei sicuro di voler eliminare tutti gli utenti registrati?')) {
+            localStorage.removeItem('mock_users');
+            setSavedUsers([]);
+        }
+    };
+
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
@@ -89,12 +110,36 @@ export default function Dashboard({ username, onLogout }: DashboardProps) {
                 </div>
 
                 <div className="info-section">
-                    <h3>🎯 Informazioni App</h3>
-                    <div className="info-content">
-                        <p>Questa è una demo di login con autenticazione mock.</p>
-                        <p>L'applicazione utilizza React + TypeScript + Vite.</p>
-                        <p>Il design è moderno con effetti glassmorphism e animazioni fluide.</p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                        <h3>👥 Utenti Registrati nel LocalStorage</h3>
+                        {savedUsers.length > 0 && (
+                            <button onClick={clearUsers} className="clear-button">Pulisci Database</button>
+                        )}
                     </div>
+                    {savedUsers.length > 0 ? (
+                        <div className="users-table-wrapper">
+                            <table className="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Ruolo</th>
+                                        <th>Data Registrazione</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {savedUsers.map((u, i) => (
+                                        <tr key={i}>
+                                            <td>{u.username}</td>
+                                            <td><span className="role-badge">{u.role}</span></td>
+                                            <td>{u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <p className="no-users">Nessun utente registrato manualmente ancora.</p>
+                    )}
                 </div>
             </div>
         </div>

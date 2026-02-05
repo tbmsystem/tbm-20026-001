@@ -330,3 +330,28 @@
         align-items: flex-start;
     }
 }
+/* Registration Link */
+.registration-link {
+    margin-top: var(--spacing-md);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.registration-link p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+.register-button {
+    background: none;
+    border: none;
+    color: #667eea;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+.register-button:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
