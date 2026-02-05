@@ -31,7 +31,7 @@ export default function Register({ onBackToLogin, onRegisterSuccess }: RegisterP
 
         // Controlla se l'utente esiste già
         const userExists = savedUsers.some((u: any) => u.username === username);
-        if (userExists || username === 'admin' || username === 'user' || username === 'demo') {
+        if (userExists) {
             setError('Username già esistente');
             setIsLoading(false);
             return;

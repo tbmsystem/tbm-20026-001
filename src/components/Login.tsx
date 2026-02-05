@@ -6,13 +6,6 @@ interface LoginProps {
   onShowRegister: () => void;
 }
 
-// Mock users database (default)
-const STATIC_USERS = [
-  { username: 'admin', password: 'admin123', role: 'Administrator' },
-  { username: 'user', password: 'user123', role: 'User' },
-  { username: 'demo', password: 'demo', role: 'Guest' },
-];
-
 export default function Login({ onLoginSuccess, onShowRegister }: LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -28,13 +21,12 @@ export default function Login({ onLoginSuccess, onShowRegister }: LoginProps) {
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 800));
 
-    // Get users from localStorage for dynamic login
+    // Get users from localStorage only
     const savedUsers = JSON.parse(localStorage.getItem('mock_users') || '[]');
-    const ALL_USERS = [...STATIC_USERS, ...savedUsers];
 
     // Check credentials
-    const user = ALL_USERS.find(
-      u => u.username === username && u.password === password
+    const user = savedUsers.find(
+      (u: any) => u.username === username && u.password === password
     );
 
     if (user) {
@@ -208,21 +200,6 @@ export default function Login({ onLoginSuccess, onShowRegister }: LoginProps) {
           <button onClick={onShowRegister} className="register-button">
             Registrati ora
           </button>
-        </div>
-
-        {/* Demo Credentials Info */}
-        <div className="demo-info">
-          <p className="demo-title">🔑 Credenziali Demo:</p>
-          <div className="demo-credentials">
-            {STATIC_USERS.map((user: any) => (
-              <div key={user.username} className="demo-credential">
-                <code>
-                  {user.username} / {user.password}
-                </code>
-                <span className="demo-role">{user.role}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
