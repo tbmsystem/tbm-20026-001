@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import Footer from './Footer';
 import './Login.css';
 
 interface LoginProps {
@@ -201,6 +202,7 @@ export default function Login({ onLoginSuccess, onShowRegister }: LoginProps) {
             Registrati ora
           </button>
         </div>
+        <Footer />
       </div>
     </div>
   );

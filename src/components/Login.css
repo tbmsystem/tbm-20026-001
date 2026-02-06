@@ -1,5 +1,5 @@
 .login-container {
-    min-height: 100vh;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,17 +129,18 @@
 }
 
 .input-field::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-secondary);
+    opacity: 0.5;
 }
 
 .input-field:focus {
     border-color: #667eea;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
     box-shadow: 0 0 0 3px var(--input-focus);
 }
 
 .input-field:hover:not(:focus) {
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: var(--input-focus);
 }
 
 .password-toggle {
@@ -160,7 +161,7 @@
 
 .password-toggle:hover {
     opacity: 1;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--input-bg);
 }
 
 /* Error Message */
@@ -289,8 +290,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
     border-radius: var(--radius-sm);
     font-size: 0.8rem;
 }
@@ -330,6 +331,7 @@
         align-items: flex-start;
     }
 }
+
 /* Registration Link */
 .registration-link {
     margin-top: var(--spacing-md);
@@ -338,10 +340,12 @@
     flex-direction: column;
     gap: 8px;
 }
+
 .registration-link p {
     font-size: 0.875rem;
     color: var(--text-secondary);
 }
+
 .register-button {
     background: none;
     border: none;
@@ -351,6 +355,7 @@
     font-size: 0.95rem;
     transition: all 0.2s;
 }
+
 .register-button:hover {
     color: #764ba2;
     text-decoration: underline;

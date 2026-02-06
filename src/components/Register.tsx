@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import Footer from './Footer';
 import './Register.css';
 
 interface RegisterProps {
@@ -112,6 +113,7 @@ export default function Register({ onBackToLogin, onRegisterSuccess }: RegisterP
                         Hai già un account? Accedi
                     </button>
                 </form>
+                <Footer />
             </div>
         </div>
     );
